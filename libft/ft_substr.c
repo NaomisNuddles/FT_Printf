@@ -23,8 +23,7 @@ char	*ft_substr(const char *src, unsigned int frt, size_t n)
 	else if (n > ft_strlen(src) - frt)
 		n = ft_strlen(src) - frt;
 	str = ft_calloc(1, n + 1);
-	if (!str)
-		return (0);
-	ft_memmove(str, &src[frt], n);
+	if (str)
+		ft_memmove(str, &src[frt], n);
 	return (str);
 }

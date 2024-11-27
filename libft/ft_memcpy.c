@@ -14,9 +14,7 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if (!src || !dst || n > ((size_t)1 << 63) - 1)
-		return (dst);
-	while (n-- > 0)
-		((unsigned char *)dst)[n] = ((unsigned char *)src)[n];
+	while (src && dst && n <= ((size_t)1 << 63) - 1 && n-- > 0)
+		*((char *)dst + n) = *((char *)src + n);
 	return (dst);
 }

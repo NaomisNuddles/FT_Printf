@@ -12,38 +12,31 @@
 
 #include "libft.h"
 
-static char	**fsplit(char **res, size_t j)
-{
-	while (res[j])
-		free(res[j++]);
-	free(res);
-	return (0);
-}
-
 char	**ft_split(const char *src, char c)
 {
 	size_t	i;
-	size_t	j;
+	size_t	l;
 	char	**res;
 
-	j = 0;
+	i = 0;
+	l = ft_strlen(src);
 	while (src && *src)
 	{
 		if (*src && *src++ != c && (*src == c || !*src))
-			j++;
+			i++;
 	}
-	res = ft_calloc(8, j + 1);
-	while (res && j > 0 && j-- && --src)
+	res = ft_calloc(8, i + 1);
+	while (res && src && i-- && src--)
 	{
-		while (*src && *src == c)
+		while (((*src != c && *(src - 1) != c) || *src == c) \
+		&& ft_strlen(src) < l)
 			src--;
-		i = ft_strlen(src);
-		while (*src && *src != c)
-			src--;
-		src++;
-		res[j] = ft_substr(src, 0, ft_strlen(src) - i + 1);
-		if (!res[j])
-			return (fsplit(res, j + 1));
+		*(res + i) = ft_substr(src, 0, ft_strchr(src, c) - src);
+		if (*(res + i))
+			continue ;
+		while (++i && *(res + i))
+			free(*(res + i));
+		return (free(res), NULL);
 	}
 	return (res);
 }

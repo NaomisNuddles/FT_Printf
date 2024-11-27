@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:22:40 by nleandro          #+#    #+#             */
-/*   Updated: 2024/11/25 10:22:42 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:19:15 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char	*ft_strmapi(const char *src, char (*f)(unsigned int, char))
 	str = ft_calloc(1, ft_strlen(src) + 1);
 	if (!str)
 		return (0);
-	while (src && f && src[i])
-	{
-		str[i] = f(i, src[i]);
-		i++;
-	}
+	while (src && f && src[i] && ++i)
+		str[i - 1] = f(i - 1, src[i - 1]);
 	return (str);
 }

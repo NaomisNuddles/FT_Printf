@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:25:55 by nleandro          #+#    #+#             */
-/*   Updated: 2024/11/25 10:25:57 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:41:34 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_itoa(int val)
 	while (val && i-- > 0)
 	{
 		ft_memset(str, 45, 1);
-		str[i] = val % 10 + 48;
+		*(str + i) = val % 10 + 48;
 		val /= 10;
 	}
 	return (str);

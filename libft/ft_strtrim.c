@@ -14,16 +14,12 @@
 
 char	*ft_strtrim(const char *src, const char *prb)
 {
-	size_t	frt;
-	size_t	lst;
+	size_t	i;
 
-	if (!src)
-		return (0);
-	frt = 0;
-	lst = ft_strlen(src);
-	while (src[frt] && ft_strchr(prb, src[frt]))
-		frt++;
-	while (lst > frt && ft_strchr(prb, src[lst - 1]))
-		lst--;
-	return (ft_substr(src, frt, lst - frt));
+	while (src && *src && ft_strchr(prb, *src))
+		src++;
+	i = ft_strlen(src);
+	while (i && ft_strrchr(prb, *((char *)src + i - 1)))
+		i--;
+	return (ft_substr(src, 0, i));
 }

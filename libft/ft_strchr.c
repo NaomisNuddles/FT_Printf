@@ -14,14 +14,10 @@
 
 char	*ft_strchr(const char *src, int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (src && i <= ft_strlen(src))
+	while (src && (*src || (!*src && !(char)c)))
 	{
-		if (src[i] == (char)c)
-			return ((char *)&src[i]);
-		i++;
+		if (*src++ == (char)c)
+			return (((char *)src - 1));
 	}
 	return (0);
 }

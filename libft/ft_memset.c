@@ -14,9 +14,7 @@
 
 void	*ft_memset(void *src, int c, size_t n)
 {
-	if (!src || n > ((size_t)1 << 63) - 1)
-		return (0);
-	while (n-- > 0)
-		((char *)src)[n] = c;
+	while (src && n <= ((size_t)1 << 63) - 1 && n-- > 0)
+		*((char *)src + n) = c;
 	return (src);
 }

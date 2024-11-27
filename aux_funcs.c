@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   aux_funcs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 10:23:01 by nleandro          #+#    #+#             */
-/*   Updated: 2024/11/26 14:19:43 by nleandro         ###   ########.fr       */
+/*   Created: 2024/11/27 19:19:52 by nleandro          #+#    #+#             */
+/*   Updated: 2024/11/27 19:40:26 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_striteri(char *src, void (*f)(unsigned int, char *))
+void	putlongnbr(long int n)
 {
-	size_t	i;
-
-	i = 0;
-	while (src && f && src[i] && ++i)
-		f(i - 1, &src[i - 1]);
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", 1);
+	else if (n < 0)
+	{
+		ft_putchar_fd(45, 1);
+		n *= -1;
+	}
+	if (n > 9)
+		putlongnbr(n / 10);
+	if (n != -2147483648)
+		ft_putchar_fd("0123456789"[n % 10], 1);
 }

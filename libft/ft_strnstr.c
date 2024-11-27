@@ -15,19 +15,17 @@
 char	*ft_strnstr(const char *src, const char *prb, size_t n)
 {
 	size_t	i;
-	size_t	j;
 
-	i = 0;
-	if (!prb[0])
+	if (!*prb)
 		return ((char *)src);
-	while (src && prb && i < n && src[i])
+	while (src && prb && *src && n-- > 0)
 	{
-		j = 0;
-		while (prb[j] && src[i + j] && src[i + j] == prb[j] && i + j < n)
-			j++;
-		if (!prb[j])
-			return ((char *)&src[i]);
-		i++;
+		i = 0;
+		while (*(prb + i) && *(src + i) && *(src + i) == *(prb + i) && n +1 - i)
+			i++;
+		if (!*(prb + i))
+			return (((char *)src));
+		src++;
 	}
 	return (0);
 }

@@ -1,6 +1,5 @@
-SRC =
-
-SRCB =
+SRC = ft_printf.c		\
+		aux_funcs.c
 
 NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror
@@ -10,12 +9,10 @@ OSB = $(SRCB:.c=.o)
 $(NAME):
 	@cc -c $(FLAGS) $(SRC)
 	@ar -rcs $(NAME) $(OS)
+	@make all -C ./libft
+	@ar -rcs $(NAME) ./libft/libft.a
 
-all: $(NAME)
-
-bonus:
-	@cc -c $(FLAGS) $(SRCB)
-	@ar -rcs $(NAME) $(OSB)
+all: $(NAME) clean
 
 clean:
 	@rm -f $(OS) $(OSB)
