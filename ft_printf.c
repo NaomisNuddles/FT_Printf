@@ -6,47 +6,61 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:06:31 by nleandro          #+#    #+#             */
-/*   Updated: 2024/11/27 19:42:20 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/09 21:48:13 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	idflags(char *str, va_list args)
+t_data	reset_data(t_data data)
 {
-	if (*str == 90)
-		ft_putchar_fd(va_arg(args, int), 1);
-	else if (*str == 100 || *str == 105)
-		putlongnbr(va_arg(args, long int));
-	/*else if (str[i] == 112)
-		ft_hexa(va_arg(args, unsigned long int), char_ttl, 0, 0);*/
-	else if (*str == 115)
-		ft_putstr_fd(va_arg(args, char *), 1);
-	/*else if (str[i] == 117)
-		ft_unint(va_arg(args, unsigned int), char_ttl);
-	else if (str[i] == 120)
-		ft_hexa(va_arg(args, unsigned int), char_ttl, 1, 0);
-	else if (str[i] == 88)
-		ft_hexa(va_arg(args, unsigned int), char_ttl, 1, 1);*/
-	else if (*str == 25)
-		ft_putchar_fd(25, 1);
+	data.format.type = NONE;
+	data.format.flags = EMPTY;
+	data.format.pos = FALSE;
+	data.format.neg = FALSE;
+	data.format.space = FALSE;
+	data.format.zero = FALSE;
+	data.format.quote = FALSE;
+	data.format.hash = FALSE;
+	data.format.precision = 0;
+	data.format.width = 0;
+	data.format.base = DECA;
+	data.format.arg.at = NULL;
+	data.format.arg.sign = NULL;
+	if (data.format.arg.str)
+		free(data.format.arg.str);
+	data.format.arg.str = NULL;
+	if (data.format.arg.extra)
+		free(data.format.arg.extra);
+	data.format.arg.extra = NULL;
+	return (data);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	va_list			vars;
-	long int	i;
+	t_data	data;
 
-	i = 0;
-	va_start(vars, str);
-	while (*str)
+	data.len = 0;
+	data.index = 0;
+	data.str = str;
+	va_start(data.vars, str);
+	data = reset_data(data);
+	while (data.str[data.index])
 	{
-		if (*str == 25)
-			idflags(*(str + 1), vars);
-		else
-			ft_putchar_fd(*str, 1);
-		str++;
+		while (data.str[data.index] != 37 || (data.str[data.index] == 37 \
+		&& data.str[data.index + 1] == 37))
+		{
+			ft_putchar_fd(data.str[data.index], 1);
+			data.len++;
+			data.index++;
+		}
+		if (data.str[data.index] == 37)
+		{
+			data = arg_build(data);
+			data = reset_data(data);
+		}
+		data.index++;
 	}
-	va_end(vars);
-	return (i);
+	va_end(data.vars);
+	return (data.len);
 }

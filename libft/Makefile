@@ -43,11 +43,11 @@ SRC = ft_isalpha.c			\
 		ft_lstmap.c
 
 NAME = libft.a
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -c -Wall -Wextra -Werror
 OS = $(SRC:.c=.o)
 
 $(NAME):
-	@cc -c $(FLAGS) $(SRC)
+	@cc $(FLAGS) $(SRC)
 	@ar -rcs $(NAME) $(OS)
 
 all: $(NAME) clean
