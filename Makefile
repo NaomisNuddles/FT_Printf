@@ -1,7 +1,8 @@
 SRC = 	aux_itoas.c		\
 		aux_types.c		\
 		aux_checks.c	\
-		aux_builds.c		\
+		aux_builds.c	\
+		aux_frees.c		\
 		ft_printf.c
 
 NAME = libftprintf.a
@@ -31,7 +32,7 @@ fclean: clean
 re: fclean all
 
 run:
-	@cc -o t main.c $(NAME)
+	@cc -o t -g main.c $(NAME)
 	@./t
 
 .PHONY: all bonus clean fclean re run

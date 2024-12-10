@@ -6,34 +6,42 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:59 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 15:00:27 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:07:01 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_data	*reset_data(t_data *data)
+static t_data	*construct(t_data *data)
 {
-	data->format->type = NONE;
-	data->format->flags = EMPTY;
-	data->format->pos = FALSE;
-	data->format->neg = FALSE;
-	data->format->space = FALSE;
-	data->format->zero = FALSE;
-	data->format->quote = FALSE;
-	data->format->hash = FALSE;
-	data->format->precision = 0;
-	data->format->width = 0;
-	data->format->base = NULL;
-	data->format->arg->at = NULL;
-	data->format->arg->sign = NULL;
-	data->format->arg->prc = NULL;
-	data->format->arg->str = NULL;
-	data->format->arg->extra = NULL;
-	return (data);
+	while (data->format->flags == EMPTY)
+	{
+		data->index++;
+		data = flags_check(data->str[data->index], data);
+	}
+	if (ft_isdigit(data->str[data->index]))
+		data->format->width = ft_atoi(&data->str[data->index]);
+	while (ft_isdigit(data->str[data->index]))
+		data->index++;
+	if (data->str[data->index] == 46)
+	{
+		data->format->precision = ft_atoi(&data->str[data->index + 1]);
+		data->index++;
+	}
+	while (ft_isdigit(data->str[data->index]))
+		data->index++;
+	if (data->str[data->index] == 37 && ++data->len)
+	{
+		ft_putchar_fd(data->str[data->index], 1);
+		return (free_build(data));
+	}
+	type_check(data->str[data->index], data);
+	data = build_check(data);
+	data = format_build(data);
+	return (free_build(data));
 }
 
-static t_data	*data_test(t_data	*data)
+static t_data	*data_format(t_data	*data)
 {
 	if (data->str[data->index] != 37 || (data->str[data->index] == 37 && \
 		data->str[data->index + 1] == 37))
@@ -44,15 +52,8 @@ static t_data	*data_test(t_data	*data)
 			data->index++;
 	}
 	else if (data->str[data->index] == 37)
-		data = print_build(reset_data(data));
+		data = construct(reset_data(data));
 	return (data);
-}
-
-static void	free_data(t_data *data)
-{
-	free(data->format->arg);
-	free(data->format);
-	free(data);
 }
 
 int	ft_printf(const char *str, ...)
@@ -75,7 +76,7 @@ int	ft_printf(const char *str, ...)
 	va_start(data->vars, str);
 	while (data->index < (int)ft_strlen(str))
 	{
-		data = data_test(data);
+		data = data_format(data);
 		data->index++;
 	}
 	va_end(data->vars);
