@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:59 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 13:26:10 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:00:27 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_data	*reset_data(t_data *data)
 	data->format->base = NULL;
 	data->format->arg->at = NULL;
 	data->format->arg->sign = NULL;
+	data->format->arg->prc = NULL;
 	data->format->arg->str = NULL;
 	data->format->arg->extra = NULL;
 	return (data);

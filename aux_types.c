@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:32 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 14:04:09 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:23:00 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_data	*is_int(t_data *data, int num)
 	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
 	ft_strlen(data->format->arg->sign)))
 		data->format->width = 0;
+	if (data->format->precision < (int)ft_strlen(data->format->arg->str))
+		data->format->precision = 0;
 	return (data);
 }
 
@@ -35,6 +37,8 @@ t_data	*is_char(t_data *data, int num)
 	char	c;
 
 	c = num;
+	if (data->format->precision)
+		data->format->precision = 0;
 	data->format->arg->str = ft_strdup(&c);
 	return (data);
 }
@@ -44,8 +48,11 @@ t_data	*is_str(t_data *data, char *str)
 	if (!str)
 		data->format->arg->str = ft_strdup("(null)");
 	else if (data->format->precision)
+	{
 		data->format->arg->str = ft_substr(str, 0, \
 		(size_t)data->format->precision);
+		data->format->precision = 0;
+	}
 	else
 		data->format->arg->str = ft_strdup(str);
 	if (data->format->width < (int)ft_strlen(data->format->arg->str))
@@ -55,7 +62,9 @@ t_data	*is_str(t_data *data, char *str)
 
 t_data	*is_uns(t_data *data, unsigned int val)
 {
-	if (data->format->hash == TRUE && ft_strlen(data->format->base) == 8)
+	if (!val)
+		data->format->arg->at = NULL;
+	else if (data->format->hash == TRUE && ft_strlen(data->format->base) == 8)
 		data->format->arg->at = PTR_OC;
 	else if (data->format->hash == TRUE && ft_strlen(data->format->base) == 16 \
 	&& data->format->base[10] == 'a')
@@ -67,11 +76,16 @@ t_data	*is_uns(t_data *data, unsigned int val)
 	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
 	ft_strlen(data->format->arg->at)))
 		data->format->width = 0;
+	if (data->format->precision < (int)(ft_strlen(data->format->arg->str) + \
+	ft_strlen(data->format->arg->at)))
+		data->format->precision = 0;
 	return (data);
 }
 
 t_data	*is_ptr(t_data *data, unsigned long int val)
 {
+	if (data->format->precision)
+		data->format->precision = 0;
 	if (!val)
 		data->format->arg->str = ft_strdup("(nil)");
 	else

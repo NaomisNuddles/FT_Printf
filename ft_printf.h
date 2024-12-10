@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 13:55:13 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:00:21 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_arg
 	char	*str;
 	char	*at;
 	char	*extra;
+	char	*prc;
 	char	*sign;
 }	t_arg;
 
