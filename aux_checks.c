@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:41 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 12:37:46 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:53:50 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ t_data	*type_check(char c, t_data *data)
 	else if (c == 's')
 		data->format->type = STR;
 	else if (c == 'p')
-	{
-		data->format->type = UNS;
-		data->format->hash = TRUE;
-	}
+		data->format->type = PTR;
 	else if (c == 'u' || c == 'o' || c == 'x' || c == 'X')
 		data->format->type = UNS;
 	else
@@ -73,6 +70,8 @@ t_data	*build_check(t_data *data)
 		data = is_str(data, va_arg(data->vars, char *));
 	else if (data->format->type == UNS)
 		data = is_uns(data, va_arg(data->vars, unsigned int));
+	else if (data->format->type == PTR)
+		data = is_ptr(data, va_arg(data->vars, unsigned long int));
 	else if (data->format->type == NONE)
 		data = reset_data(data);
 	return (data);

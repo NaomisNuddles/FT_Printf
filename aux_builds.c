@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 13:11:35 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:04:41 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ static t_data	*format_build(t_data *data)
 	ft_putstr_fd(data->format->arg->at, 1);
 	if (data->format->zero == TRUE)
 		ft_putstr_fd(data->format->arg->extra, 1);
-	ft_putstr_fd(data->format->arg->str, 1);
+	if (data->format->type == CHAR && !data->format->arg->str[0] && ++data->len)
+		write(1, "\0", 1);
+	else
+		ft_putstr_fd(data->format->arg->str, 1);
 	if (data->format->neg == TRUE)
 		ft_putstr_fd(data->format->arg->extra, 1);
 	if (data->format->width)

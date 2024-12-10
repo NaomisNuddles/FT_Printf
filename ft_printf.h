@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 12:38:02 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:55:13 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef enum e_type
 	STR = 2,
 	INT = 3,
 	UNS = 4,
-	NONE = 5
+	PTR = 5,
+	NONE = 6
 }	t_type;
 
 typedef enum e_flags
@@ -83,6 +84,7 @@ typedef struct s_data
 
 //		aux_itoas.c
 char		*uns_itoa_base(unsigned int val, char *base);
+char		*unsl_itoa_base(unsigned long val, char *base);
 
 //		aux_checks.c
 t_data		*flags_check(char c, t_data *data);
@@ -94,6 +96,7 @@ t_data		*is_int(t_data *data, int num);
 t_data		*is_char(t_data *data, int num);
 t_data		*is_str(t_data *data, char *str);
 t_data		*is_uns(t_data *data, unsigned int val);
+t_data		*is_ptr(t_data *data, unsigned long int val);
 
 //		aux_builds.c
 t_data		*print_build(t_data *data);

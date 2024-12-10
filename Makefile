@@ -31,7 +31,7 @@ fclean: clean
 re: fclean all
 
 run:
-	@cc -o t $(FLAGS) main.c $(NAME)
+	@cc -o t main.c $(NAME)
 	@./t
 
 .PHONY: all bonus clean fclean re run

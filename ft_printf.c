@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:59 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 13:06:24 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:26:10 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_printf(const char *str, ...)
 	data->index = 0;
 	data->str = str;
 	va_start(data->vars, str);
-	while (data->index <= (int)ft_strlen(str))
+	while (data->index < (int)ft_strlen(str))
 	{
 		data = data_test(data);
 		data->index++;

@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:32 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 13:06:42 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:04:09 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ t_data	*is_char(t_data *data, int num)
 
 t_data	*is_str(t_data *data, char *str)
 {
-	if (data->format->precision)
+	if (!str)
+		data->format->arg->str = ft_strdup("(null)");
+	else if (data->format->precision)
 		data->format->arg->str = ft_substr(str, 0, \
 		(size_t)data->format->precision);
 	else
@@ -62,6 +64,21 @@ t_data	*is_uns(t_data *data, unsigned int val)
 	&& data->format->base[10] == 'A')
 		data->format->arg->at = PTR_HU;
 	data->format->arg->str = uns_itoa_base(val, data->format->base);
+	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
+	ft_strlen(data->format->arg->at)))
+		data->format->width = 0;
+	return (data);
+}
+
+t_data	*is_ptr(t_data *data, unsigned long int val)
+{
+	if (!val)
+		data->format->arg->str = ft_strdup("(nil)");
+	else
+	{
+		data->format->arg->str = unsl_itoa_base(val, data->format->base);
+		data->format->arg->at = PTR_HD;
+	}
 	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
 	ft_strlen(data->format->arg->at)))
 		data->format->width = 0;
