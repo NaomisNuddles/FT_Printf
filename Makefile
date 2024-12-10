@@ -1,5 +1,5 @@
 SRC = 	aux_itoas.c		\
-		aux_types.C		\
+		aux_types.c		\
 		aux_checks.c	\
 		aux_builds.c		\
 		ft_printf.c
@@ -19,6 +19,8 @@ $(NAME):
 	@make clean --no-print-directory
 
 all: $(NAME)
+
+bonus: re
 
 clean:
 	@rm -f $(OS)

@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/09 21:35:09 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:38:02 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 # define FT_PRINTF_H
 
 # include "libft/libft.h"
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
 # include <stdarg.h>
 
 # define HEXMA "0123456789ABCDEF"
@@ -44,7 +39,7 @@ typedef enum e_type
 	STR = 2,
 	INT = 3,
 	UNS = 4,
-	NONE = 0
+	NONE = 5
 }	t_type;
 
 typedef enum e_flags
@@ -63,8 +58,7 @@ typedef struct s_arg
 
 typedef struct s_format
 {
-	t_arg	arg;
-	char	*str;
+	t_arg	*arg;
 	int		width;
 	int		precision;
 	char	*base;
@@ -81,7 +75,7 @@ typedef struct s_format
 typedef struct s_data
 {
 	va_list		vars;
-	t_format	format;
+	t_format	*format;
 	const char	*str;
 	int			len;
 	int			index;
@@ -91,22 +85,21 @@ typedef struct s_data
 char		*uns_itoa_base(unsigned int val, char *base);
 
 //		aux_checks.c
-t_data		flags_check(char c, t_data data);
-t_data		type_check(char c, t_data data);
-t_data		build_check(t_data data);
+t_data		*flags_check(char c, t_data *data);
+t_data		*type_check(char c, t_data *data);
+t_data		*build_check(t_data *data);
 
 //		aux_types.c
-t_data		is_int(t_data data);
-t_data		is_char(t_data data);
-t_data		is_str(t_data data);
-t_data		is_uns(t_data data);
+t_data		*is_int(t_data *data, int num);
+t_data		*is_char(t_data *data, int num);
+t_data		*is_str(t_data *data, char *str);
+t_data		*is_uns(t_data *data, unsigned int val);
 
 //		aux_builds.c
-t_data		format_build(t_data data);
-t_data		arg_build(t_data data);
+t_data		*print_build(t_data *data);
 
 //		ft_printf.c
-t_data		reset_data(t_data data);
+t_data		*reset_data(t_data *data);
 int			ft_printf(const char *end, ...);
 
 #endif //FT_PRINTF_H

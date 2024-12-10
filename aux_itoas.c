@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 19:19:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/09 21:34:59 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/09 23:15:08 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*uns_itoa_base(unsigned int val, char *base)
 	n = val;
 	while (ft_strlen(base) >= 2 && ft_strlen(base) <= 16 && n && ++i)
 		n /= ft_strlen(base);
+	if (val == 0)
+		i = 1;
 	str = ft_calloc(1, i + 1);
 	while (str && i--)
 	{
