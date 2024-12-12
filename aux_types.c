@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:32 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 19:59:27 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:19:10 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ t_data	*is_int(t_data *data, int num)
 		data->format->arg->at_s = SIG_POS;
 	else if (num >= 0 && data->format->space == TRUE)
 		data->format->arg->at_s = SIG_SPC;
-	if (num < 0)
+	if (num == 0 && data->format->precision == 0)
+		data->format->arg->str = NULL;
+	else if (num < 0)
 		data->format->arg->str = uns_itoa_base(-num, data->format->base);
 	else
 		data->format->arg->str = uns_itoa_base(num, data->format->base);
@@ -45,9 +47,18 @@ t_data	*is_char(t_data *data, int num)
 
 t_data	*is_str(t_data *data, char *str)
 {
-	if (!str && data->format->precision == -1)
+	if (!str && data->format->precision >= 0 && data->format->precision <= 5)
+	{
+		data->format->arg->str = ft_strdup(str);
+		data->format->precision = -1;
+	}
+	else if (!str && (data->format->precision >= 6 || \
+	data->format->precision == -1))
+	{
 		data->format->arg->str = ft_strdup("(null)");
-	if (data->format->precision >= 0)
+		data->format->precision = -1;
+	}
+	else if (data->format->precision >= 0)
 	{
 		data->format->arg->str = ft_substr(str, 0, \
 		(size_t)data->format->precision);
@@ -72,7 +83,10 @@ t_data	*is_uns(t_data *data, unsigned int val)
 	else if (data->format->hash == TRUE && ft_strlen(data->format->base) == 16 \
 	&& data->format->base[10] == 'A')
 		data->format->arg->at_s = PTR_HU;
-	data->format->arg->str = uns_itoa_base(val, data->format->base);
+	if (val == 0 && data->format->precision == 0)
+		data->format->arg->str = NULL;
+	else
+		data->format->arg->str = uns_itoa_base(val, data->format->base);
 	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
 	ft_strlen(data->format->arg->at_s)))
 		data->format->width = 0;

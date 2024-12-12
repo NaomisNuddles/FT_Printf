@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:41 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 18:38:39 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:21:26 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ t_data	*type_check(char c, t_data *data)
 
 t_data	*build_check(t_data *data)
 {
+	if (data->format->precision >= 0 && (data->format->type == INT || \
+	data->format->type == UNS))
+		data->format->zero = FALSE;
 	if (data->format->type == INT)
 		data = is_int(data, va_arg(data->vars, int));
 	else if (data->format->type == CHAR)
@@ -73,6 +76,9 @@ t_data	*build_check(t_data *data)
 	else if (data->format->type == PTR)
 		data = is_ptr(data, va_arg(data->vars, unsigned long int));
 	else if (data->format->type == NONE)
-		data = reset_data(data);
+	{
+		while (data->str[data->index] != 37)
+			data->index--;
+	}
 	return (data);
 }

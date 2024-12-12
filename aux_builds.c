@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 19:54:16 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:17:48 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ t_data	*precision_build(t_data *data)
 		return (data);
 	data->format->arg->prc = \
 	ft_memset(data->format->arg->prc, 48, size);
+	if (data->format->width < (int)(ft_strlen(data->format->arg->at_s) + \
+	ft_strlen(data->format->arg->str) + ft_strlen(data->format->arg->prc)))
+		data->format->width = 0;
 	return (data);
 }
 

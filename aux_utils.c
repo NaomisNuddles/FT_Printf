@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_frees.c                                        :+:      :+:    :+:   */
+/*   aux_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:01:07 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 19:12:18 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:06:45 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_data	*set_data(void)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (0);
+	data->format = malloc(sizeof(t_format));
+	if (!data->format)
+		return (0);
+	data->format->arg = malloc(sizeof(t_arg));
+	if (!data->format->arg)
+		return (0);
+	return (data);
+}
 
 t_data	*reset_data(t_data *data)
 {

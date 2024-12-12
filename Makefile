@@ -2,7 +2,7 @@ SRC = 	aux_itoas.c		\
 		aux_types.c		\
 		aux_checks.c	\
 		aux_builds.c	\
-		aux_frees.c		\
+		aux_utils.c		\
 		ft_printf.c
 
 NAME = libftprintf.a

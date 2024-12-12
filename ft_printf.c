@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:59 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 20:07:01 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:06:34 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,11 @@ int	ft_printf(const char *str, ...)
 	t_data	*data;
 	int		len;
 
-	data = malloc(sizeof(t_data));
+	data = set_data();
 	if (!data)
 		return (0);
-	data->format = malloc(sizeof(t_format));
-	if (!data->format)
-		return (0);
-	data->format->arg = malloc(sizeof(t_arg));
-	if (!data->format->arg)
-		return (0);
+	if (!str)
+		return (-1);
 	data->len = 0;
 	data->index = 0;
 	data->str = str;

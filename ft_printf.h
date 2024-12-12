@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 19:18:34 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:57:51 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ t_data		*is_ptr(t_data *data, unsigned long int val);
 t_data		*precision_build(t_data *data);
 t_data		*width_build(t_data *data);
 t_data		*format_build(t_data *data);
-//		aux_frees.c
+//		aux_utils.c
+t_data		*set_data(void);
 t_data		*reset_data(t_data *data);
 t_data		*free_build(t_data *data);
 void		free_data(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 22:29:36 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/10 20:02:05 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:14:53 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	main(void)
 	int	i;
 	int	j;
 
-	i = printf("o:%05%$", 1);
+	i = printf("o:%+8.0i$", 0);
 	printf("\n");
-	j = ft_printf("f:%05%$", 1);
+	j = ft_printf("f:%+8.0i$", 0);
 	ft_printf("\n");
 	ft_printf("sizeo:%d$\n", i);
 	ft_printf("sizef:%d$\n", j);
