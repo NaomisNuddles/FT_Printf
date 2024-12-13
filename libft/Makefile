@@ -1,4 +1,4 @@
-#			-->|   Files   |<--
+#			-->|   Files to Compile   |<--
 FILES		=		ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint			\
 					ft_memset ft_bzero ft_memcpy ft_memmove ft_memchr ft_memcmp		\
 					ft_toupper ft_tolower ft_strchr ft_strrchr ft_strnstr			\
@@ -9,97 +9,114 @@ FILES		=		ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint			\
 					ft_lstnew ft_lstadd_front ft_lstadd_back ft_lstsize ft_lstlast	\
 					ft_lstdelone ft_lstclear ft_lstiter ft_lstmap
 
-#			-->|   Titles   |<--
-START		=		start
-HEAD		=		"42 Library"
+#			-->|   Settings   |<--
+PROG		=	0
+EXT			=	0
 
+#			-->|   Titles && Messages   |<--
+HEAD		=		"42 Library"
 NAME		=		libft.a
 #DIRS		=		libft
-DIRS		=		"FALSE"
 
-#			-->|   Directory Definitions   |<--
-INC			=		./
-SRC			=		./
-OBJ			=		obj/
+T_CREATING	=		@echo "$(GRAY)-->|	$(BBLUE)Creating $(HEAD) at $(NAME) $(GRAY)...\n"
+T_BUILDING	=		@echo "\n	$(GRAY)... $(BYELLOW)Building $@ $(GRAY)... \n"
+T_COMPILING	=		@echo "	$(GRAY)... $(YELLOW)Compiling $< $(GRAY)..."
+T_REMOVE_O	=		@echo "$(MAGENTA)$(HEAD): Objects Removed!$(DEF)\n"
+T_REMOVE_A	=		@echo "$(BMAGENTA)$(HEAD): All Files Removed!$(DEF)\n"
+T_COMPILED	=		@echo "$(BGREEN)	     $(HEAD) Compiled!   $(GRAY)|<--$(DEF)\n"
+T_EXECUTING	=		@echo "\n$(GRAY)-->|	$(BLUE)Executing: $(BCYAN)$(NAME) - main.c $(BLUE)at $(WHITE)exe $(GRAY)...$(DEF)"
+T_EXECUTED	=		@echo "$(GRAY)	...$(BGREEN)Execution Ended!   $(GRAY)|<--$(DEF)\n"
 
 #			-->|   Colors   |<--
+GRAY		=		\033[0;30m
+GREEN		=		\033[0;32m
+YELLOW		=		\033[0;33m
+BLUE		=		\033[0;34m
+MAGENTA		=		\033[0;35m
+CYAN		=		\033[0;36m
+WHITE		=		\033[0;37m
 DEF			=		\033[0;39m
-ORANGE		=		\033[0;33m
-PURPLE		=		\033[0;35m
-GRAY		=		\033[0;90m
-RED			=		\033[0;91m
-GREEN		=		\033[0;92m
-YELLOW		=		\033[0;93m
-BLUE		=		\033[0;94m
-MAGENTA		=		\033[0;95m
-CYAN		=		\033[0;96m
-WHITE		=		\033[0;97m
 
-#			-->|   Object Handle   |<--
-SRC_C		=		$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
-SRC_O		=		$(addprefix $(OBJ), $(addsuffix .o, $(FILES)))
-LIBS		=		$(addprefix $(DIRS)/, $(addsuffix .a, $(DIRS))) 
+BGREEN		=		\033[1;32m
+BYELLOW		=		\033[1;33m
+BBLUE		=		\033[1;34m
+BMAGENTA	=		\033[1;35m
+BCYAN		=		\033[1;36m
 
-#			-->|   Command Definitions   |<--
-CC_F		=		@cc -Wall -Wextra -Werror -I
+#			-->|   Print Messsages   |<--
+
+
+#			-->|   Conditional Command Definitions   |<--
+START		=		1
+ifeq ($(PROG),1)
+INC_DIR		=		includes/
+SRC_DIR		=		src/
+else
+INC_DIR		=		./
+SRC_DIR		=		./
+endif
+OBJ_DIR		=		obj/
+
+FLAGS		=		-Wall -Wextra -Werror
 M			=		@make --no-print-directory
 
-ifeq ($(DIRS),"FALSE")
-M_DA		=
-M_DC		=
-M_DF		=
-CP			=
-LIBS		=
+COMPILE		=		@cc $(FLAGS) -I $(INC_DIR) -c $< -o $@
+EXE			=		@cc -I $(INC_DIR) -o exe main.c $(NAME) && ./exe && rm -f exe
+RMV			=		@rm -rf $(OBJ_DIR)
+AR			=		@ar -rcs $@ $(OBJ)
+
+SRC			=		$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
+OBJ			=		$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
+
+ifeq ($(EXT), 1)
+LIBS		=		$(addprefix $(DIRS)/, $(addsuffix .a, $(DIRS))) 
+AR_EXT		=		$(M) -C $(DIRS) all && cp $(LIBS) $(NAME)
+M_C			=		$(M) -C $(DIRS) clean
+M_F			=		$(M) -C $(DIRS) fclean
 else
-M_DA		=		@make --no-print-directory -C $(DIRS) all
-M_DC		=		@make --no-print-directory -C $(DIRS) clean
-M_DF		=		@make --no-print-directory -C $(DIRS) fclean
-CP			=		@cp $(LIBS) $(NAME)
-LIBS		=		$(addprefix $(DIRS)/, $(addsuffix .a, $(DIRS)))
+AR_EXT		=
+M_C			=
+M_F			=
 endif
 
 #			-->|   Rules   |<--
 .PHONY: all bonus clean fclean re exe
 
 all: $(START) $(NAME)
-	@echo "$(GREEN)	     $(HEAD) Compiled!   $(GRAY)|<--$(DEF)\n"
+	$(T_COMPILED)
 
 bonus: re
 
 clean:
-	$(M_DC)
-	@rm -rf $(OBJ)
-	@echo "$(CYAN)$(HEAD): Objects Removed!$(DEF)\n"
+	$(M_C)
+	$(RMV)
+	$(T_REMOVE_O)
 
 
 fclean:
-	$(M_DF)
-	@rm -rf $(NAME) $(OBJ)
-	@echo "$(BLUE)$(HEAD): All Files Removed!$(DEF)\n"
+	$(M_F)
+	$(RMV) $(NAME)
+	$(T_REMOVE_A)
 
 re: fclean all
 
 exe: re
-	@echo "\n$(GRAY)	-->|	$(PURPLE)Executing: $(WHITE) exe.a of $(MAGENTA)$@ - main.c $(DEF)..."
-	$(CC) -o exe main*.c $(NAME)
-	@./exe.a bonus
-	@rm -f exe
-	$(M) clean
-	@echo "$(GRAY)...$(GREEN)Execution Ended!   $(GRAY)|<--$(DEF)\n"
+	$(T_EXECUTING)
+	$(EXE)
+	$(T_EXECUTED)
 
 #			-->|   File Dependencies   |<--
 $(START):
-	@echo "$(GRAY)-->|	$(MAGENTA)Creating $(HEAD) at $(NAME) $(GRAY)...\n"
+	$(T_CREATING)
 
-$(OBJ):
-	@mkdir $(OBJ)
+$(OBJ_DIR):
+	@mkdir $(OBJ_DIR)
 
-$(OBJ)%.o: $(SRC)%.c | $(OBJ)
-	@echo "	$(GRAY)... $(YELLOW)Compiling $< $(GRAY)..."
-	$(CC_F) $(INC) -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+	$(T_COMPILING)
+	$(COMPILE)
 
-$(NAME): $(SRC_O)
-	@echo "\n	$(GRAY)... $(ORANGE)Building $@ $(GRAY)... \n"
-	$(M_DA)
-	$(CP)
-	@ar -rcs $@ $(SRC_O)
+$(NAME): $(OBJ)
+	$(T_BUILDING)
+	$(AR_EXT)
+	$(AR)
