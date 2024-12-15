@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_utils.c                                        :+:      :+:    :+:   */
+/*   aux_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:01:07 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/12 16:06:45 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:59:06 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_data	*set_data(void)
+static void	null_data(t_data *data)
+{
+	data->format->type = NONE;
+	data->format->flags = EMPTY;
+	data->format->format = FALSE;
+	data->format->pos = FALSE;
+	data->format->neg = FALSE;
+	data->format->space = FALSE;
+	data->format->zero = FALSE;
+	data->format->quote = FALSE;
+	data->format->hash = FALSE;
+	data->format->precision = -1;
+	data->format->width = 0;
+	data->format->base = NULL;
+	data->format->arg->extra = NULL;
+	data->format->arg->at_s = NULL;
+	data->format->arg->prc = NULL;
+	data->format->arg->str = NULL;
+}
+
+t_data	*set_data(const char *str)
 {
 	t_data	*data;
 
@@ -25,38 +45,22 @@ t_data	*set_data(void)
 	data->format->arg = malloc(sizeof(t_arg));
 	if (!data->format->arg)
 		return (0);
+	data->len = 0;
+	data->index = 0;
+	data->str = str;
+	null_data(data);
 	return (data);
 }
 
-t_data	*reset_data(t_data *data)
-{
-	data->format->type = NONE;
-	data->format->flags = EMPTY;
-	data->format->pos = FALSE;
-	data->format->neg = FALSE;
-	data->format->space = FALSE;
-	data->format->zero = FALSE;
-	data->format->quote = FALSE;
-	data->format->hash = FALSE;
-	data->format->precision = -1;
-	data->format->width = 0;
-	data->format->base = NULL;
-	data->format->arg->at_s = NULL;
-	data->format->arg->prc = NULL;
-	data->format->arg->str = NULL;
-	data->format->arg->extra = NULL;
-	return (data);
-}
-
-t_data	*free_build(t_data *data)
+void	reset_data(t_data *data)
 {
 	if (data->format->width)
 		free(data->format->arg->extra);
-	if (data->format->precision)
+	if (data->format->precision > 0)
 		free(data->format->arg->prc);
 	if (data->format->type != NONE)
 		free(data->format->arg->str);
-	return (data);
+	null_data(data);
 }
 
 void	free_data(t_data *data)

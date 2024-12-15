@@ -6,13 +6,14 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:32 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/12 16:19:10 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:43:55 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_data	*is_int(t_data *data, int num)
+//is_int creates creates
+void	is_int(t_data *data, int num)
 {
 	if (num < 0)
 		data->format->arg->at_s = SIG_NEG;
@@ -26,52 +27,31 @@ t_data	*is_int(t_data *data, int num)
 		data->format->arg->str = uns_itoa_base(-num, data->format->base);
 	else
 		data->format->arg->str = uns_itoa_base(num, data->format->base);
-	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
-	ft_strlen(data->format->arg->at_s)))
-		data->format->width = 0;
-	if (data->format->precision < (int)ft_strlen(data->format->arg->str))
-		data->format->precision = -1;
-	return (data);
 }
 
-t_data	*is_char(t_data *data, int num)
+void	is_char(t_data *data, int num)
 {
 	char	c;
 
 	c = num;
-	if (data->format->precision >= 0)
-		data->format->precision = -1;
 	data->format->arg->str = ft_strdup(&c);
-	return (data);
 }
 
-t_data	*is_str(t_data *data, char *str)
+void	is_str(t_data *data, char *str)
 {
 	if (!str && data->format->precision >= 0 && data->format->precision <= 5)
-	{
 		data->format->arg->str = ft_strdup(str);
-		data->format->precision = -1;
-	}
 	else if (!str && (data->format->precision >= 6 || \
 	data->format->precision == -1))
-	{
 		data->format->arg->str = ft_strdup("(null)");
-		data->format->precision = -1;
-	}
 	else if (data->format->precision >= 0)
-	{
 		data->format->arg->str = ft_substr(str, 0, \
 		(size_t)data->format->precision);
-		data->format->precision = -1;
-	}
 	else
 		data->format->arg->str = ft_strdup(str);
-	if (data->format->width < (int)ft_strlen(data->format->arg->str))
-		data->format->width = 0;
-	return (data);
 }
 
-t_data	*is_uns(t_data *data, unsigned int val)
+void	is_uns(t_data *data, unsigned int val)
 {
 	if (!val)
 		data->format->arg->at_s = NULL;
@@ -87,18 +67,10 @@ t_data	*is_uns(t_data *data, unsigned int val)
 		data->format->arg->str = NULL;
 	else
 		data->format->arg->str = uns_itoa_base(val, data->format->base);
-	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
-	ft_strlen(data->format->arg->at_s)))
-		data->format->width = 0;
-	if (data->format->precision < (int)ft_strlen(data->format->arg->str))
-		data->format->precision = -1;
-	return (data);
 }
 
-t_data	*is_ptr(t_data *data, unsigned long int val)
+void	is_ptr(t_data *data, unsigned long int val)
 {
-	if (data->format->precision >= 0)
-		data->format->precision = -1;
 	if (!val)
 		data->format->arg->str = ft_strdup("(nil)");
 	else
@@ -106,8 +78,4 @@ t_data	*is_ptr(t_data *data, unsigned long int val)
 		data->format->arg->str = unsl_itoa_base(val, data->format->base);
 		data->format->arg->at_s = PTR_HD;
 	}
-	if (data->format->width < (int)(ft_strlen(data->format->arg->str) + \
-	ft_strlen(data->format->arg->at_s)))
-		data->format->width = 0;
-	return (data);
 }

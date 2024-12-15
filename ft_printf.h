@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/14 15:40:53 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:16:27 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,25 @@
 
 typedef enum e_check
 {
-	TRUE = 1,
-	FALSE = 0
+	TRUE,
+	FALSE
 }	t_check;
 
 typedef enum e_type
 {
-	NONE = 0,
-	CHAR = 1,
-	STR = 2,
-	INT = 3,
-	UNS = 4,
-	PTR = 5
+	NONE,
+	CHAR,
+	STR,
+	INT,
+	UNS,
+	PTR,
+	CEN
 }	t_type;
 
 typedef enum e_flags
 {
-	FILLED = 1,
-	EMPTY = 0
+	FILLED,
+	EMPTY
 }	t_flags;
 
 typedef struct s_arg
@@ -60,6 +61,7 @@ typedef struct s_arg
 typedef struct s_format
 {
 	t_arg	*arg;
+	t_check	format;
 	int		width;
 	int		precision;
 	char	*base;
@@ -85,26 +87,35 @@ typedef struct s_data
 //		aux_itoas.c
 char		*uns_itoa_base(unsigned int val, char *base);
 char		*unsl_itoa_base(unsigned long val, char *base);
+
 //		aux_checks.c
-t_data		*flags_check(char c, t_data *data);
-t_data		*type_check(char c, t_data *data);
-t_data		*build_check(t_data *data);
+void		flags_check(char c, t_data *data);
+void		type_check(char c, t_data *data);
+void		build_check(t_data *data);
+
 //		aux_types.c
-t_data		*is_int(t_data *data, int num);
-t_data		*is_char(t_data *data, int num);
-t_data		*is_str(t_data *data, char *str);
-t_data		*is_uns(t_data *data, unsigned int val);
-t_data		*is_ptr(t_data *data, unsigned long int val);
+void		is_int(t_data *data, int num);
+void		is_char(t_data *data, int num);
+void		is_str(t_data *data, char *str);
+void		is_uns(t_data *data, unsigned int val);
+void		is_ptr(t_data *data, unsigned long int val);
+
 //		aux_builds.c
-t_data		*precision_build(t_data *data);
-t_data		*width_build(t_data *data);
-t_data		*format_build(t_data *data);
-//		aux_utils.c
-t_data		*set_data(void);
-t_data		*reset_data(t_data *data);
-t_data		*free_build(t_data *data);
+void		arg_build(t_data *data);
+void		precision_build(t_data *data);
+void		width_build(t_data *data);
+
+//		aux_data.c
+//static void	null_data(t_data *data);
+t_data		*set_data(const char *str);
+void		reset_data(t_data *data);
 void		free_data(t_data *data);
-//		ft_printf.c - static construct and data_format
+//		aux_format.c
+void		find_format(t_data	*data);
+void		construct_format(t_data	*data);
+void		print_format(t_data *data);
+
+//		ft_printf.c
 int			ft_printf(const char *end, ...);
 
 #endif //FT_PRINTF_H

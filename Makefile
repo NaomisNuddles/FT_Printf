@@ -1,5 +1,5 @@
 #			-->|   Files to Compile   |<--
-FILES		=		aux_itoas aux_types aux_checks aux_builds aux_utils ft_printf
+FILES		=		aux_itoas aux_types aux_checks aux_builds aux_data aux_format ft_printf
 
 #			-->|   Settings   |<--
 PROG		=	0
@@ -53,7 +53,7 @@ FLAGS		=		-Wall -Wextra -Werror
 M			=		@make --no-print-directory
 
 COMPILE		=		@cc $(FLAGS) -I $(INC_DIR) -c $< -o $@
-EXE			=		@cc -I $(INC_DIR) -o exe main.c $(NAME) && ./exe && rm -f exe
+EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe other && rm -f exe
 RMV			=		@rm -rf $(OBJ_DIR)
 AR			=		@ar -rcs $@ $(OBJ)
 

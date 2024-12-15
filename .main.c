@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   .main.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 23:01:52 by pda-silv          #+#    #+#             */
-/*   Updated: 2024/12/12 16:26:48 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:29:48 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ TestCase test_cases_bonus[] = {
 typedef enum e_test
 {
 	MANDATORY,
-	BONUS
+	BONUS,
+	OTHER
 }	t_test;
 
 static void	test_log_append(const char *str);
@@ -78,26 +79,44 @@ int			main(int argc, char *argv[])
 
 	if (argc > 1 && !strcmp(argv[1], "bonus"))
 		test = BONUS;
-
-	FILE *log_file = freopen("results.log", "a", stdout);
-	if (!log_file)
-	{
-		perror("freopen");
-		return 1;
-	}
-
-	test_log_append(BREAK);
+	else if(argc > 1 && !strcmp(argv[1], "other"))
+		test = OTHER;
 	
-	if (test == BONUS)
-		test_bonus();
+	if (test == OTHER)
+	{
+		int	a;
+		int	b;
+
+		a = printf("o:%.2s$ %.1s$ ", "", "-");
+		ft_printf("\n");
+		b = ft_printf("f:%.2s$ %.1s$ ", "", "-");
+		ft_printf("\n");
+		ft_printf("size og: %d\n", a);
+		ft_printf("size ft: %d\n", b);
+	}
 	else
-		test_mandatory();
+	{
+		FILE *log_file = freopen("results.log", "a", stdout);
+		if (!log_file)
+		{
+			perror("freopen");
+			return 1;
+		}
 
-	if (log_file)
-		fclose(log_file);
+		test_log_append(BREAK);
+		
+		if (test == BONUS)
+			test_bonus();
+		else
+			test_mandatory();
 
-	test_log_append(BREAK);
-	test_log_append("\n");
+
+		if (log_file)
+			fclose(log_file);
+
+		test_log_append(BREAK);
+		test_log_append("\n");
+	}
 	
 	return (0);
 }
