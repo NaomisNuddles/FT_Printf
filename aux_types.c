@@ -6,13 +6,12 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:32 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/15 16:43:55 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:14:38 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//is_int creates creates
 void	is_int(t_data *data, int num)
 {
 	if (num < 0)
@@ -34,7 +33,7 @@ void	is_char(t_data *data, int num)
 	char	c;
 
 	c = num;
-	data->format->arg->str = ft_strdup(&c);
+	data->format->arg->str = ft_substr(&c, 0, 1);
 }
 
 void	is_str(t_data *data, char *str)

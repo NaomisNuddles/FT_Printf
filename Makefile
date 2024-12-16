@@ -68,7 +68,7 @@ all: $(START) $(NAME) $(OBJ)
 	$(AR)
 	$(T_COMPILED)
 
-bonur: re
+bonus: re
 
 #bonus: $(BONUS) $(NAME) $(OBJ_B)
 #	$(AR_B)

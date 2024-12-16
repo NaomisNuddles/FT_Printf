@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 23:01:52 by pda-silv          #+#    #+#             */
-/*   Updated: 2024/12/15 16:29:48 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:14:44 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int			main(int argc, char *argv[])
 		int	a;
 		int	b;
 
-		a = printf("o:%.2s$ %.1s$ ", "", "-");
+		a = printf("o:%c$", 'a');
 		ft_printf("\n");
-		b = ft_printf("f:%.2s$ %.1s$ ", "", "-");
+		b = ft_printf("f:%c$", 'a');
 		ft_printf("\n");
 		ft_printf("size og: %d\n", a);
 		ft_printf("size ft: %d\n", b);
