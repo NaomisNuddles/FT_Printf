@@ -27,7 +27,7 @@ RMV			=		@rm -rf $(OBJ_DIR)
 AR			=		@ar -rcs $(NAME) $(OBJ)
 
 #			-->|   Colors & Messages   |<--
-START		=		1
+START		=		start
 
 GRAY		=		\033[0;30m
 GREEN		=		\033[0;32m

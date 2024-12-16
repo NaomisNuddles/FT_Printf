@@ -30,11 +30,11 @@ RMV			=		@rm -rf $(OBJ_DIR)
 AR			=		@ar -rcs $(NAME) $(OBJ)
 AR_B		=		@ar -rcs $(NAME) $(OBJ_B)
 
-EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe other && rm -f exe
+EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe bonus && rm -f exe
 
 #			-->|   Colors & Messages   |<--
-START		=		1
-BONUS		=		1
+START		=		start
+BONUS		=		bonus
 
 GRAY		=		\033[0;30m
 GREEN		=		\033[0;32m
