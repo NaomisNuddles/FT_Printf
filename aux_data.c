@@ -6,13 +6,13 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:01:07 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/15 15:59:06 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:18:39 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	null_data(t_data *data)
+static t_data	*null_data(t_data *data)
 {
 	data->format->type = NONE;
 	data->format->flags = EMPTY;
@@ -30,6 +30,7 @@ static void	null_data(t_data *data)
 	data->format->arg->at_s = NULL;
 	data->format->arg->prc = NULL;
 	data->format->arg->str = NULL;
+	return (data);
 }
 
 t_data	*set_data(const char *str)
@@ -38,18 +39,24 @@ t_data	*set_data(const char *str)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (0);
+		return (NULL);
 	data->format = malloc(sizeof(t_format));
 	if (!data->format)
-		return (0);
+	{
+		free(data);
+		return (NULL);
+	}
 	data->format->arg = malloc(sizeof(t_arg));
 	if (!data->format->arg)
-		return (0);
+	{
+		free(data->format);
+		free(data);
+		return (NULL);
+	}
 	data->len = 0;
 	data->index = 0;
 	data->str = str;
-	null_data(data);
-	return (data);
+	return (null_data(data));
 }
 
 void	reset_data(t_data *data)
@@ -60,7 +67,7 @@ void	reset_data(t_data *data)
 		free(data->format->arg->prc);
 	if (data->format->type != NONE)
 		free(data->format->arg->str);
-	null_data(data);
+	data = null_data(data);
 }
 
 void	free_data(t_data *data)

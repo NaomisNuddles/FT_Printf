@@ -34,6 +34,7 @@ EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe other && rm -f exe
 
 #			-->|   Colors & Messages   |<--
 START		=		1
+BONUS		=		1
 
 GRAY		=		\033[0;30m
 GREEN		=		\033[0;32m

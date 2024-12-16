@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:45:41 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/15 16:43:39 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:11:20 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	find_format(t_data *data)
 	{
 		ft_putchar_fd(data->str[data->index], 1);
 		data->len++;
-		if (data->str[data->index] == 37)
+		if (data->str[data->index] == '%')
 			data->index++;
 	}
 	else if (data->str[data->index] == '%')
@@ -31,7 +31,7 @@ void	find_format(t_data *data)
 			data->format->width = ft_atoi(&data->str[data->index]);
 		while (ft_isdigit(data->str[data->index]))
 			data->index++;
-		if (data->str[data->index] == 46 && ++data->index)
+		if (data->str[data->index] == '.' && ++data->index)
 			data->format->precision = ft_atoi(&data->str[data->index]);
 		while (ft_isdigit(data->str[data->index]))
 			data->index++;
@@ -41,7 +41,7 @@ void	find_format(t_data *data)
 
 void	construct_format(t_data	*data)
 {
-	arg_build(data);
+	type_build(data);
 	if (data->format->type == CHAR || data->format->type == STR || \
 	data->format->type == PTR)
 		data->format->precision = -1;

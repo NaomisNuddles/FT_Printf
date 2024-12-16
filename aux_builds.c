@@ -6,13 +6,13 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/15 15:39:41 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:11:44 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	arg_build(t_data *data)
+void	type_build(t_data *data)
 {
 	if (data->format->type == INT)
 		is_int(data, va_arg(data->vars, int));
