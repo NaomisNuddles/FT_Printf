@@ -1,25 +1,40 @@
 #			-->|   Files to Compile   |<--
 FILES		=		aux_itoas aux_types aux_checks aux_builds aux_data aux_format ft_printf
 
-#			-->|   Settings   |<--
-PROG		=	0
-EXT			=	1
+FILES_B		=		#aux_itoas_bonus aux_types_bonus aux_checks_bonus aux_builds_bonus aux_data_bonus aux_format_bonus ft_printf_bonus
 
-#			-->|   Titles && Messages   |<--
+#			-->|   Titles   |<--
 HEAD		=		"42 Printf"
+HEAD_B		=		"42 Printf Bonus"
 NAME		=		libftprintf.a
-DIRS		=		libft
+LIBFT		=		libft
 
-T_CREATING	=		@echo "$(GRAY)-->|	$(BBLUE)Creating $(HEAD) at $(NAME) $(GRAY)...\n"
-T_BUILDING	=		@echo "\n	$(GRAY)... $(BYELLOW)Building $@ $(GRAY)... \n"
-T_COMPILING	=		@echo "	$(GRAY)... $(YELLOW)Compiling $< $(GRAY)..."
-T_REMOVE_O	=		@echo "$(MAGENTA)$(HEAD): Objects Removed!$(DEF)\n"
-T_REMOVE_A	=		@echo "$(BMAGENTA)$(HEAD): All Files Removed!$(DEF)\n"
-T_COMPILED	=		@echo "$(BGREEN)	     $(HEAD) Compiled!   $(GRAY)|<--$(DEF)\n"
-T_EXECUTING	=		@echo "\n$(GRAY)-->|	$(BLUE)Executing: $(BCYAN)$(NAME) - main.c $(BLUE)at $(WHITE)exe $(GRAY)...$(DEF)"
-T_EXECUTED	=		@echo "$(GRAY)	...$(BGREEN)Execution Ended!   $(GRAY)|<--$(DEF)\n"
+#			-->|   Command Definitions   |<--
+INC_DIR		=		./
+SRC_DIR		=		./
+OBJ_DIR		=		obj/
 
-#			-->|   Colors   |<--
+SRC			=		$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
+OBJ			=		$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
+SRC_B		=		$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES_B)))
+OBJ_B		=		$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES_B)))
+LIBS		=		$(addprefix $(LIBFT)/, $(addsuffix .a, $(LIBFT)))
+
+AR_EXT		=		@make --no-print-directory -C $(LIBFT) all && cp $(LIBS) $(NAME)
+M_C			=		@make --no-print-directory -C $(LIBFT) clean
+M_F			=		@make --no-print-directory -C $(LIBFT) fclean
+
+FLAGS		=		-Wall -Wextra -Werror
+COMPILE		=		@cc $(FLAGS) -I $(INC_DIR) -c $< -o $@
+RMV			=		@rm -rf $(OBJ_DIR)
+AR			=		@ar -rcs $(NAME) $(OBJ)
+AR_B		=		@ar -rcs $(NAME) $(OBJ_B)
+
+EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe other && rm -f exe
+
+#			-->|   Colors & Messages   |<--
+START		=		1
+
 GRAY		=		\033[0;30m
 GREEN		=		\033[0;32m
 YELLOW		=		\033[0;33m
@@ -35,55 +50,33 @@ BBLUE		=		\033[1;34m
 BMAGENTA	=		\033[1;35m
 BCYAN		=		\033[1;36m
 
-#			-->|   Print Messsages   |<--
-
-
-#			-->|   Conditional Command Definitions   |<--
-START		=		1
-ifeq ($(PROG),1)
-INC_DIR		=		includes/
-SRC_DIR		=		src/
-else
-INC_DIR		=		./
-SRC_DIR		=		./
-endif
-OBJ_DIR		=		obj/
-
-FLAGS		=		-Wall -Wextra -Werror
-M			=		@make --no-print-directory
-
-COMPILE		=		@cc $(FLAGS) -I $(INC_DIR) -c $< -o $@
-EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe other && rm -f exe
-RMV			=		@rm -rf $(OBJ_DIR)
-AR			=		@ar -rcs $@ $(OBJ)
-
-SRC			=		$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
-OBJ			=		$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
-
-ifeq ($(EXT), 1)
-LIBS		=		$(addprefix $(DIRS)/, $(addsuffix .a, $(DIRS))) 
-AR_EXT		=		$(M) -C $(DIRS) all && cp $(LIBS) $(NAME)
-M_C			=		$(M) -C $(DIRS) clean
-M_F			=		$(M) -C $(DIRS) fclean
-else
-AR_EXT		=
-M_C			=
-M_F			=
-endif
+T_CREATING	=		@echo "$(GRAY)-->|	$(BBLUE)Creating $(HEAD) at $(NAME) $(GRAY)...\n"
+T_CREATING_B=		@echo "$(GRAY)-->|	$(BBLUE)Creating $(HEAD_B) at $(NAME) $(GRAY)...\n"
+T_BUILDING	=		@echo "	$(GRAY)... $(BYELLOW)Building $(NAME) $(GRAY)... \n"
+T_COMPILING	=		@echo "	$(GRAY)... $(YELLOW)Compiling $< $(GRAY)..."
+T_REMOVE_O	=		@echo "$(MAGENTA)$(HEAD): Objects Removed!$(DEF)\n"
+T_REMOVE_A	=		@echo "$(BMAGENTA)$(HEAD): All Files Removed!$(DEF)\n"
+T_COMPILED	=		@echo "\n$(BGREEN)	     $(HEAD) Compiled!   $(GRAY)|<--$(DEF)\n"
+T_EXECUTING	=		@echo "\n$(GRAY)-->|	$(BLUE)Executing: $(BCYAN)$(NAME) - main.c $(BLUE)at $(WHITE)exe $(GRAY)...$(DEF)"
+T_EXECUTED	=		@echo "$(GRAY)	...$(BGREEN)Execution Ended!   $(GRAY)|<--$(DEF)\n"
 
 #			-->|   Rules   |<--
 .PHONY: all bonus clean fclean re exe
 
-all: $(START) $(NAME)
+all: $(START) $(NAME) $(OBJ)
+	$(AR)
 	$(T_COMPILED)
 
-bonus: re
+bonur: re
+
+#bonus: $(BONUS) $(NAME) $(OBJ_B)
+#	$(AR_B)
+#	$(T_COMPILED)
 
 clean:
 	$(M_C)
 	$(RMV)
 	$(T_REMOVE_O)
-
 
 fclean:
 	$(M_F)
@@ -100,6 +93,11 @@ exe: re
 #			-->|   File Dependencies   |<--
 $(START):
 	$(T_CREATING)
+	$(T_BUILDING)
+
+$(BONUS):
+	$(T_CREATING_B)
+	$(T_BUILDING)
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
@@ -108,7 +106,5 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(T_COMPILING)
 	$(COMPILE)
 
-$(NAME): $(OBJ)
-	$(T_BUILDING)
+$(NAME):
 	$(AR_EXT)
-	$(AR)
