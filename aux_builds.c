@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 15:11:44 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:42:55 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	type_build(t_data *data)
 	}
 	else if (data->format->type == NONE)
 	{
-		while (data->str[data->index] != 37)
+		while (data->str[data->index] != '%')
 			data->index--;
 	}
 }
@@ -42,7 +42,7 @@ void	precision_build(t_data *data)
 
 	size = (size_t)data->format->precision - ft_strlen(data->format->arg->str);
 	if (ft_strlen(data->format->base) == 8)
-		size -= 1;
+		size -= ft_strlen(data->format->arg->at_s);
 	data->format->arg->prc = ft_calloc(1, size + 1);
 	if (!data->format->arg->prc)
 		return ;

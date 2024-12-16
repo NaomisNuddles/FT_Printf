@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 15:18:57 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:26:39 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ char		*unsl_itoa_base(unsigned long val, char *base);
 //		aux_checks.c
 void		flags_check(char c, t_data *data);
 void		type_check(char c, t_data *data);
-void		build_check(t_data *data);
 
 //		aux_types.c
 void		is_int(t_data *data, int num);

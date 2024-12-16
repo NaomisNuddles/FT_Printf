@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 23:01:52 by pda-silv          #+#    #+#             */
-/*   Updated: 2024/12/16 19:14:44 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:57:07 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int			main(int argc, char *argv[])
 		int	a;
 		int	b;
 
-		a = printf("o:%c$", 'a');
+		a = printf("o:%-0.500p$", "14326");
 		ft_printf("\n");
-		b = ft_printf("f:%c$", 'a');
+		b = ft_printf("f:%-0.500p$", "14326");
 		ft_printf("\n");
 		ft_printf("size og: %d\n", a);
 		ft_printf("size ft: %d\n", b);

@@ -185,3 +185,190 @@ Tests: 18	Errors: 0
 
 ————————————————————————————————————————
 
+
+————————————————————————————————————————
+
+Test case: -->|No Flags|<-- 
+
+Printf output     : -->|No Flags|<-- 
+Ft_printf output  : -->|No Flags|<-- 
+
+Printf len    : 17
+Ft_printf len : 17
+
+————————————————————————————————————————
+
+Test case: -->|%c|<-- 
+
+Printf output     : -->|B|<-- 
+Ft_printf output  : -->|B|<-- 
+
+Printf len    : 10
+Ft_printf len : 10
+
+————————————————————————————————————————
+
+Test case: -->|%s|<-- 
+
+Printf output     : -->|Bonus test|<-- 
+Ft_printf output  : -->|Bonus test|<-- 
+
+Printf len    : 19
+Ft_printf len : 19
+
+————————————————————————————————————————
+
+Test case: -->|%p|<-- 
+
+Printf output     : -->|0x406120|<-- 
+Ft_printf output  : -->|0x406120|<-- 
+
+Printf len    : 17
+Ft_printf len : 17
+
+————————————————————————————————————————
+
+Test case: -->|%d|<-- 
+
+Printf output     : -->|321|<-- 
+Ft_printf output  : -->|321|<-- 
+
+Printf len    : 12
+Ft_printf len : 12
+
+————————————————————————————————————————
+
+Test case: -->|%i|<-- 
+
+Printf output     : -->|654|<-- 
+Ft_printf output  : -->|654|<-- 
+
+Printf len    : 12
+Ft_printf len : 12
+
+————————————————————————————————————————
+
+Test case: -->|%u|<-- 
+
+Printf output     : -->|987|<-- 
+Ft_printf output  : -->|987|<-- 
+
+Printf len    : 12
+Ft_printf len : 12
+
+————————————————————————————————————————
+
+Test case: -->|%x|<-- 
+
+Printf output     : -->|123|<-- 
+Ft_printf output  : -->|123|<-- 
+
+Printf len    : 12
+Ft_printf len : 12
+
+————————————————————————————————————————
+
+Test case: -->|%X|<-- 
+
+Printf output     : -->|456|<-- 
+Ft_printf output  : -->|456|<-- 
+
+Printf len    : 12
+Ft_printf len : 12
+
+————————————————————————————————————————
+
+Test case: -->|%%|<-- 
+
+Printf output     : -->|%|<-- 
+Ft_printf output  : -->|%|<-- 
+
+Printf len    : 10
+Ft_printf len : 10
+
+————————————————————————————————————————
+
+Test case: -->|%-10d|<-- 
+
+Printf output     : -->|123       |<-- 
+Ft_printf output  : -->|123       |<-- 
+
+Printf len    : 19
+Ft_printf len : 19
+
+————————————————————————————————————————
+
+Test case: -->|%+d|<-- 
+
+Printf output     : -->|+123|<-- 
+Ft_printf output  : -->|+123|<-- 
+
+Printf len    : 13
+Ft_printf len : 13
+
+————————————————————————————————————————
+
+Test case: -->|% d|<-- 
+
+Printf output     : -->| 123|<-- 
+Ft_printf output  : -->| 123|<-- 
+
+Printf len    : 13
+Ft_printf len : 13
+
+————————————————————————————————————————
+
+Test case: -->|%#x|<-- 
+
+Printf output     : -->|0xabc|<-- 
+Ft_printf output  : -->|0xabc|<-- 
+
+Printf len    : 14
+Ft_printf len : 14
+
+————————————————————————————————————————
+
+Test case: -->|%010d|<-- 
+
+Printf output     : -->|0000000123|<-- 
+Ft_printf output  : -->|0000000123|<-- 
+
+Printf len    : 19
+Ft_printf len : 19
+
+————————————————————————————————————————
+
+Test case: -->|%10.5d|<-- 
+
+Printf output     : -->|     00123|<-- 
+Ft_printf output  : -->|     00123|<-- 
+
+Printf len    : 19
+Ft_printf len : 19
+
+————————————————————————————————————————
+
+Test case: -->|%.5s|<-- 
+
+Printf output     : -->|Hello|<-- 
+Ft_printf output  : -->|Hello|<-- 
+
+Printf len    : 14
+Ft_printf len : 14
+
+————————————————————————————————————————
+
+Test case: -->|%-10s|<-- 
+
+Printf output     : -->|Left      |<-- 
+Ft_printf output  : -->|Left      |<-- 
+
+Printf len    : 19
+Ft_printf len : 19
+
+————————————————————————————————————————
+
+Tests: 18	Errors: 0
+
+————————————————————————————————————————
+
