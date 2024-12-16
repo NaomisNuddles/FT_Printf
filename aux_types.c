@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:32 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 20:46:57 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:25:26 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,18 @@ void	is_uns(t_data *data, unsigned int val)
 void	is_ptr(t_data *data, unsigned long int val)
 {
 	if (!val)
+	{
 		data->format->arg->str = ft_strdup("(nil)");
+		data->format->precision = -1;
+	}
 	else
 	{
 		data->format->arg->str = unsl_itoa_base(val, data->format->base);
-		data->format->arg->at_s = PTR_HD;
+		if (data->format->pos == TRUE)
+			data->format->arg->at_s = PTR_POS;
+		else if (data->format->space == TRUE)
+			data->format->arg->at_s = PTR_SPC;
+		else
+			data->format->arg->at_s = PTR_HD;
 	}
 }

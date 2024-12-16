@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:45:41 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 18:51:20 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:03:52 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	find_format(t_data *data)
 void	construct_format(t_data	*data)
 {
 	type_build(data);
-	if (data->format->type == CHAR || data->format->type == STR || \
-	data->format->type == PTR)
+	if (data->format->type == CHAR || data->format->type == STR)
 		data->format->precision = -1;
 	else if ((size_t)data->format->precision < \
 	ft_strlen(data->format->arg->str))

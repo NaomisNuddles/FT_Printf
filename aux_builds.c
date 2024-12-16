@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 20:42:55 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:13:43 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	width_build(t_data *data)
 		return ;
 	data->format->arg->extra = ft_memset(data->format->arg->extra, 32, size);
 	if (data->format->zero == TRUE && (data->format->type == INT || \
-	data->format->type == UNS))
+	data->format->type == UNS || data->format->type == PTR))
 		data->format->arg->extra = \
 		ft_memset(data->format->arg->extra, 48, size);
 }

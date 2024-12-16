@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 20:26:39 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:25:52 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define SIG_NEG "-"
 # define SIG_POS "+"
 # define SIG_SPC " "
+# define PTR_POS "+0x"
+# define PTR_SPC " 0x"
 
 typedef enum e_check
 {
