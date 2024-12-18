@@ -1,7 +1,7 @@
 #			-->|   Files to Compile   |<--
 FILES		=		aux_itoas aux_types aux_checks aux_builds aux_data aux_format ft_printf
 
-FILES_B		=		#aux_itoas_bonus aux_types_bonus aux_checks_bonus aux_builds_bonus aux_data_bonus aux_format_bonus ft_printf_bonus
+FILES_B		=		aux_itoas_bonus aux_types_bonus aux_checks_bonus aux_builds_bonus aux_data_bonus aux_format_bonus ft_printf_bonus
 
 #			-->|   Titles   |<--
 HEAD		=		"42 Printf"
@@ -34,7 +34,7 @@ EXE			=		@cc -I $(INC_DIR) -o exe .main.c $(NAME) && ./exe other && rm -f exe
 
 #			-->|   Colors & Messages   |<--
 START		=		start
-BONUS		=		bonus
+START_B		=		start_b
 
 GRAY		=		\033[0;30m
 GREEN		=		\033[0;32m
@@ -68,11 +68,9 @@ all: $(START) $(NAME) $(OBJ)
 	$(AR)
 	$(T_COMPILED)
 
-bonus: re
-
-#bonus: $(BONUS) $(NAME) $(OBJ_B)
-#	$(AR_B)
-#	$(T_COMPILED)
+bonus: $(START_B) $(NAME) $(OBJ_B)
+	$(AR_B)
+	$(T_COMPILED)
 
 clean:
 	$(M_C)
@@ -96,7 +94,7 @@ $(START):
 	$(T_CREATING)
 	$(T_BUILDING)
 
-$(BONUS):
+$(START_B):
 	$(T_CREATING_B)
 	$(T_BUILDING)
 
