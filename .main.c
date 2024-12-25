@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 23:01:52 by pda-silv          #+#    #+#             */
-/*   Updated: 2024/12/16 21:29:16 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:21:18 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,25 @@ int			main(int argc, char *argv[])
 	
 	if (test == OTHER)
 	{
-		int	a;
-		int	b;
+		ft_printf("f:%i$\n", (unsigned char)-1);
+		ft_printf("f:%x$\n", (unsigned char)-1);
+		ft_printf("f:%x$\n", -1);
+		ft_printf("f:%x$\n", (short)123987);
+		ft_printf("f:%u$\n", (short)123987);
+		printf("o:%hu$\n", (short)256);
+		printf("o:%hhx$\n", (short)123987);
+		printf("o:%x$\n", -1);
+		printf("o:%x$\n", (unsigned char)-1);
+		printf("o:%hhx$\n", (unsigned char)-1);
+		printf("o:%hhi$\n", (unsigned char)-1);
 
-		a = printf("o:%100c$", "123456"[2]);
-		ft_printf("\n");
-		b = ft_printf("f:%100c$", "123456"[2]);
-		ft_printf("\n");
-		ft_printf("size og: %d\n", a);
-		ft_printf("size ft: %d\n", b);
+		printf("\n\nHex covert:\no:%x$\n%x$\n%x$\n", 4294967295, 65535, 255);
+		printf("\nuns\no:%u$\n", (short)-1);
+		printf("o:%hu$\n", (short)-1);
+		printf("o:%hhu$\n", (short)-1);
+		printf("\nuns\no:%x$\n", (short)-1);
+		printf("o:%hx$\n", (short)-1);
+		printf("o:%hhx$\n", (short)-1);
 	}
 	else
 	{

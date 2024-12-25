@@ -6,13 +6,13 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:01:07 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 20:48:57 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:34:05 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_data	*null_format(t_data *data)
+static void	null_format(t_data *data)
 {
 	data->format->type = NONE;
 	data->format->flags = EMPTY;
@@ -30,7 +30,6 @@ static t_data	*null_format(t_data *data)
 	data->format->arg->at_s = NULL;
 	data->format->arg->prc = NULL;
 	data->format->arg->str = NULL;
-	return (data);
 }
 
 t_data	*set_data(const char *str)
@@ -56,21 +55,19 @@ t_data	*set_data(const char *str)
 	data->len = 0;
 	data->index = 0;
 	data->str = str;
-	return (null_format(data));
+	null_format(data);
+	return (data);
 }
 
 void	reset_data(t_data *data)
 {
-	if (data->format->type != CEN)
-	{
-		if (data->format->width)
-			free(data->format->arg->extra);
-		if (data->format->precision > 0)
-			free(data->format->arg->prc);
-	}
+	if (data->format->width)
+		free(data->format->arg->extra);
+	if (data->format->precision > 0)
+		free(data->format->arg->prc);
 	if (data->format->type != NONE)
 		free(data->format->arg->str);
-	data = null_format(data);
+	null_format(data);
 }
 
 void	free_data(t_data *data)

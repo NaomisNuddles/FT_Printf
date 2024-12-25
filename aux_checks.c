@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:41 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/15 16:10:55 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:39:08 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	flags_check(char c, t_data *data)
 	if (data->format->neg == TRUE)
 		data->format->zero = FALSE;
 }
+void	length_check(char c, t_data *data)
+{
+	if (c == 'l' || c == 'i')
+		data->format->type = INT;
+	else if (c == 'c')
+		data->format->type = CHAR;
+}
 
 void	type_check(char c, t_data *data)
 {
@@ -44,7 +51,7 @@ void	type_check(char c, t_data *data)
 		data->format->type = STR;
 	else if (c == 'p')
 		data->format->type = PTR;
-	else if (c == 'u' || c == 'o' || c == 'x' || c == 'X')
+	else if (c == 'u' || c == 'o' || c == 'x' || c == 'X' || c == 'b')
 		data->format->type = UNS;
 	else if (c == '%')
 		data->format->type = CEN;
@@ -58,7 +65,6 @@ void	type_check(char c, t_data *data)
 		data->format->base = HEXMA;
 	else if (c == 'i' || c == 'd' || c == 'u')
 		data->format->base = DECA;
-	if (data->format->precision >= 0 && (data->format->type == INT || \
-	data->format->type == UNS))
-		data->format->zero = FALSE;
+	else if (c == 'b')
+		data->format->base = BIN;
 }

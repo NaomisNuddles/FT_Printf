@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:52 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 21:13:43 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:23:35 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ void	precision_build(t_data *data)
 		size -= ft_strlen(data->format->arg->at_s);
 	data->format->arg->prc = ft_calloc(1, size + 1);
 	if (!data->format->arg->prc)
+	{
+		data->format->precision = -1;
 		return ;
+	}
 	data->format->arg->prc = ft_memset(data->format->arg->prc, 48, size);
+	data->format->zero = FALSE;
 }
 
 void	width_build(t_data *data)
@@ -60,7 +64,10 @@ void	width_build(t_data *data)
 		size -= 1;
 	data->format->arg->extra = ft_calloc(1, size + 1);
 	if (!data->format->arg->extra)
+	{
+		data->format->width = 0;
 		return ;
+	}
 	data->format->arg->extra = ft_memset(data->format->arg->extra, 32, size);
 	if (data->format->zero == TRUE && (data->format->type == INT || \
 	data->format->type == UNS || data->format->type == PTR))

@@ -68,9 +68,10 @@ all: $(START) $(NAME) $(OBJ)
 	$(AR)
 	$(T_COMPILED)
 
-bonus: $(START_B) $(NAME) $(OBJ_B)
-	$(AR_B)
-	$(T_COMPILED)
+bonus: re
+# $(START_B) $(NAME) $(OBJ_B)
+#	$(AR_B)
+#	$(T_COMPILED)
 
 clean:
 	$(M_C)

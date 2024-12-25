@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:58 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/16 21:25:52 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:19:42 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define HEXMA "0123456789ABCDEF"
 # define HEXMI "0123456789abcdef"
 # define OCTA "01234567"
+# define BIN "01"
 # define DECA "0123456789"
 # define PTR_HU "0X"
 # define PTR_HD "0x"
