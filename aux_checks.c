@@ -6,7 +6,7 @@
 /*   By: nleandro <nleandro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 23:26:41 by nleandro          #+#    #+#             */
-/*   Updated: 2024/12/19 11:39:08 by nleandro         ###   ########.fr       */
+/*   Updated: 2024/12/31 23:41:41 by nleandro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ void	flags_check(char c, t_data *data)
 		data->format->space = FALSE;
 	if (data->format->neg == TRUE)
 		data->format->zero = FALSE;
-}
-void	length_check(char c, t_data *data)
-{
-	if (c == 'l' || c == 'i')
-		data->format->type = INT;
-	else if (c == 'c')
-		data->format->type = CHAR;
 }
 
 void	type_check(char c, t_data *data)
